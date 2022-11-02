@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | Comfy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./index.js" type="module"></script>
+    <style></style>
+  </head>
+  <body>
+    <!-- class='overlay-active' -->
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="nav-center">
+        <div>
+          <button class="toggle-nav">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li>
+              <a href="./index.html" class="nav-link active-nav-link">home</a>
+            </li>
+            <li><a href="./products.html" class="nav-link">products</a></li>
+            <li><a href="./about.html" class="nav-link">about</a></li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <img src="./images/logo-white.svg" alt="" class="nav-logo" />
+        <!-- end of logo -->
+
+        <!-- cart icon -->
+        <div class="toggle-container">
+          <button class="toggle-cart">
+            <i class="fa-solid fa-shopping-cart"></i>
+          </button>
+          <span class="cart-item-count">0</span>
+        </div>
+        <!-- end of cart icon -->
+      </div>
+    </nav>
+    <!-- end of navbar -->
+
+    <!-- hero -->
+    <section class="hero">
+      <div class="hero-container">
+        <h1 class="text-slanted">rest, relax, unwind</h1>
+        <h3>Embrace your choices - we do</h3>
+        <a href="./products.html" class="hero-btn">show now</a>
+      </div>
+    </section>
+    <!-- end of hero -->
+
+    <!-- sidebar -->
+    <div class="sidebar-overlay">
+      <aside class="sidebar">
+        <!-- close -->
+        <button class="sidebar-close">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <!-- end of close -->
+        <!-- links -->
+        <ul class="sidebar-links">
+          <li>
+            <a href="./index.html" class="sidebar-link active-sidebar-link"
+              ><i class="fa-solid fa-home fa-fw"></i>home</a
+            >
+          </li>
+          <li>
+            <a href="./products.html" class="sidebar-link"
+              ><i class="fa-solid fa-couch fa-fw"></i>products</a
+            >
+          </li>
+          <li>
+            <a href="./about.html" class="sidebar-link"
+              ><i class="fa-solid fa-book fa-fw"></i>about</a
+            >
+          </li>
+        </ul>
+        <!-- end of links -->
+      </aside>
+    </div>
+    <!-- end of sidebar -->
+
+    <!-- cart -->
+    <div class="cart-overlay">
+      <aside class="cart">
+        <button class="cart-close">
+          <i class="fa-solid fa-times"></i>
+        </button>
+
+        <header class="cart-header">
+          <h3 class="text-slanted">your bag</h3>
+        </header>
+
+        <!-- cart-items -->
+        <div class="cart-items">
+          <!-- single cart item -->
+          <!-- <article class="cart-item">
+            <img src="./images/main-bcg.jpeg" alt="" class="cart-img" />
+
+            <div class="cart-info">
+              <h4>High-Back Bench</h4>
+              <p>$9.99</p>
+              <button class="remove-btn">remove</button>
+            </div>
+
+            <div class="counter">
+              <button class="count-btn increment-count">
+                <i class="fa-solid fa-chevron-up"></i>
+              </button>
+              <span class="cart-count">10</span>
+              <button class="count-btn decrement-count">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+          </article> -->
+          <!-- end of single cart item -->
+        </div>
+        <!-- end of cart-items -->
+
+        <footer>
+          <h3 class="cart-total text-slanted">total : $12.99</h3>
+          <button class="cart-checkout btn">checkout</button>
+        </footer>
+      </aside>
+    </div>
+    <!-- end of cart -->
+
+    <!-- featured products -->
+    <section class="section featured">
+      <div class="title">
+        <h2><span>/</span> featured</h2>
+      </div>
+
+      <div class="featured-center section-center">
+        <!-- <h2 class="section-loading">loading...</h2> -->
+
+        <!-- single skeleton product -->
+        <!-- <article class="skeleton-product">
+          <div class="skeleton-img"></div>
+
+          <footer class="skeleton-footer">
+            <div class="skeleton-product-name"></div>
+            <div class="skeleton-product-price"></div>
+          </footer>
+        </article> -->
+        <!-- end of single skeleton product -->
+
+        <!-- single product -->
+        <!-- <article class="product">
+          <div class="product-container">
+            <img
+              src="./images/main-bcg.jpeg"
+              alt=""
+              class="product-img img skeleton-img"
+            />
+
+            <div class="product-overlay">
+              <div class="product-icons">
+                <a
+                  href="product.html?id=1"
+                  target="_blank"
+                  class="product-icon"
+                >
+                  <i class="fa-solid fa-search"></i>
+                </a>
+
+                <button class="product-cart-btn product-icon" data-id="1">
+                  <i class="fa-solid fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <footer>
+            <p class="product-name">name</p>
+            <h4 class="product-price">$9.99</h4>
+          </footer>
+        </article> -->
+        <!-- end of single product -->
+      </div>
+
+      <a href="./products.html" class="btn">all products</a>
+    </section>
+    <!-- end of featured products -->
+  </body>
+</html>
