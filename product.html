@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Product</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./src/pages/product.js" type="module"></script>
+  </head>
+  <body>
+    <!-- class='overlay-active' -->
+    <!-- navbar -->
+    <nav class="navbar page">
+      <div class="nav-center">
+        <div>
+          <button class="toggle-nav">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li>
+              <a href="./index.html" class="nav-link">home</a>
+            </li>
+            <li>
+              <a href="./products.html" class="nav-link active-nav-link"
+                >products</a
+              >
+            </li>
+            <li><a href="./about.html" class="nav-link">about</a></li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <img src="./images/logo-black.svg" alt="" class="nav-logo" />
+        <!-- end of logo -->
+
+        <!-- cart icon -->
+        <div class="toggle-container">
+          <button class="toggle-cart">
+            <i class="fa-solid fa-shopping-cart"></i>
+          </button>
+          <span class="cart-item-count">0</span>
+        </div>
+        <!-- end of cart icon -->
+      </div>
+    </nav>
+    <!-- end of navbar -->
+
+    <!-- hero -->
+    <section class="page-hero">
+      <div class="section-center">
+        <h3 class="page-hero-title">Home / Products</h3>
+      </div>
+    </section>
+    <!-- end of hero -->
+
+    <!-- sidebar -->
+    <div class="sidebar-overlay">
+      <aside class="sidebar">
+        <!-- close -->
+        <button class="sidebar-close">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <!-- end of close -->
+        <!-- links -->
+        <ul class="sidebar-links">
+          <li>
+            <a href="./index.html" class="sidebar-link"
+              ><i class="fa-solid fa-home fa-fw"></i>home</a
+            >
+          </li>
+          <li>
+            <a href="./products.html" class="sidebar-link active-sidebar-link"
+              ><i class="fa-solid fa-couch fa-fw"></i>products</a
+            >
+          </li>
+          <li>
+            <a href="./about.html" class="sidebar-link"
+              ><i class="fa-solid fa-book fa-fw"></i>about</a
+            >
+          </li>
+        </ul>
+        <!-- end of links -->
+      </aside>
+    </div>
+    <!-- end of sidebar -->
+
+    <!-- cart -->
+    <div class="cart-overlay">
+      <aside class="cart">
+        <button class="cart-close">
+          <i class="fa-solid fa-times"></i>
+        </button>
+
+        <header class="cart-header">
+          <h3 class="text-slanted">your bag</h3>
+        </header>
+
+        <!-- cart-items -->
+        <div class="cart-items">
+          <!-- single cart item -->
+          <!-- <article class="cart-item">
+            <img src="./images/main-bcg.jpeg" alt="" class="cart-img" />
+
+            <div class="cart-info">
+              <h4>High-Back Bench</h4>
+              <p>$9.99</p>
+              <button class="remove-btn">remove</button>
+            </div>
+
+            <div class="counter">
+              <button class="count-btn increment-count">
+                <i class="fa-solid fa-chevron-up"></i>
+              </button>
+              <span class="cart-count">10</span>
+              <button class="count-btn decrement-count">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+          </article> -->
+          <!-- end of single cart item -->
+        </div>
+        <!-- end of cart-items -->
+
+        <footer>
+          <h3 class="cart-total text-slanted">total : $12.99</h3>
+          <button class="cart-checkout btn">checkout</button>
+        </footer>
+      </aside>
+    </div>
+    <!-- end of cart -->
+
+    <!-- product-info -->
+    <section class="single-product">
+      <div class="section-center single-product-center">
+        <img
+          src="./images/main-bcg.jpeg"
+          alt=""
+          class="single-product-img img"
+        />
+
+        <article class="single-product-info">
+          <div>
+            <h2 class="single-product-title">couch</h2>
+            <p class="single-product-company text-slanted">by marcos</p>
+            <p class="single-product-price">$50.00</p>
+            <div class="single-product-colors">
+              <div class="product-color"></div>
+            </div>
+            <p class="single-product-desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id,
+              modi? Minima libero doloremque necessitatibus! Praesentium
+              recusandae quod nesciunt animi voluptatem!
+            </p>
+            <button class="addToCartBtn btn" data-id="id">add to cart</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- end of product-info -->
+
+    <!-- skeleton-single-product -->
+    <!-- <div class="skeleton-single-product">
+      <div class="section-center single-product-center">
+        <div class="skeleton-single-product-img">
+          <i class="fa-regular fa-image"></i>
+        </div>
+
+        <div class="skeleton-single-product-info">
+          <div>
+            <div class="single-product-title"></div>
+            <div class="single-product-company text-slanted"></div>
+            <div class="skeleton-product-price"></div>
+            <div class="single-product-colors">
+              <div class="skeleton-product-color product-color"></div>
+              <div class="skeleton-product-color product-color"></div>
+              <div class="skeleton-product-color product-color"></div>
+            </div>
+            <div class="single-product-desc">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="addToCartBtn btn" data-id="id">add to cart</div>
+          </div>
+        </article>
+      </div>
+    </div> -->
+    <!-- end of skeleton-single-product -->
+
+    <!-- <div class="page-loading">
+      <h2>loading...</h2>
+    </div> -->
+  </body>
+</html>
