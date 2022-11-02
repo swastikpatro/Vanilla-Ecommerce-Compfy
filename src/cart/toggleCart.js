@@ -13,3 +13,8 @@ cartCloseBtn.addEventListener('click', () => {
   cartOverlay.classList.remove('show-cart');
   document.body.classList.remove('overlay-active');
 });
+
+export const openCart = () => {
+  cartOverlay.classList.add('show-cart');
+  document.body.classList.add('overlay-active');
+};
