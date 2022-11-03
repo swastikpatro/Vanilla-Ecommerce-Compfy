@@ -149,7 +149,10 @@
           <h4>Company</h4>
           <article class="companies">
             <button class="company-btn">all</button>
-            <button class="company-btn">ikea</button>
+            <div class="skeleton-companies"></div>
+            <div class="skeleton-companies"></div>
+            <div class="skeleton-companies"></div>
+            <div class="skeleton-companies"></div>
             <!-- & much more dynamically added -->
           </article>
           <!-- end of categories -->
@@ -160,11 +163,11 @@
               type="range"
               class="price-filter"
               min="0"
-              value="50"
-              max="100"
+              value="80"
+              max="80"
             />
           </form>
-          <p class="price-value">Value: <span>$</span></p>
+          <p class="price-value">Under: <span>$80</span></p>
           <!-- end of price -->
         </div>
       </div>
@@ -174,8 +177,10 @@
       <div class="products-container">
         <!-- dynamically add here -->
 
+        <!-- <div class="loading"></div> -->
+
         <!-- single skeleton product -->
-        <article class="skeleton-product">
+        <!-- <article class="skeleton-product">
           <div class="skeleton-img">
             <i class="fa-regular fa-image"></i>
           </div>
@@ -184,7 +189,7 @@
             <div class="skeleton-product-name"></div>
             <div class="skeleton-product-price"></div>
           </footer>
-        </article>
+        </article> -->
         <!-- end of single skeleton product -->
 
         <!-- single product -->
