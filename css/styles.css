@@ -1060,6 +1060,8 @@ Product
 
 .product footer > .product-name {
   margin: 0.5rem 0 0.25rem 0;
+  width: 100%;
+  text-align: center;
   color: var(--grey-500);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-transform: capitalize;
