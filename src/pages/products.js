@@ -157,7 +157,7 @@ function setPriceValue(val) {
 async function handlePriceFilter(e) {
   removeActiveCompanyBtn();
   searchBar.value = '';
-  const price = e.target.value;
+  const price = e.target.valueAsNumber;
   setPriceValue(price);
   const allProducts = await fetchProducts(allProductsUrl, productsContainer);
 
@@ -191,6 +191,6 @@ searchBar.addEventListener('click', async () => {
   }
 });
 
-rangeInput.addEventListener('click', handlePriceFilter);
+rangeInput.addEventListener('change', handlePriceFilter);
 
 companiesDOM.addEventListener('click', handleCompanyBtnsClick);
