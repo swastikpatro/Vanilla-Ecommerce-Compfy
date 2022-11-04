@@ -16,4 +16,26 @@ function createRange(endNo) {
   return Array.from({ length: endNo }, (_, i) => i + 1);
 }
 
-export { getElement, allProductsUrl, singleProductUrl, createRange };
+const getStorageItem = (name) => {
+  let storageItem = localStorage.getItem(name);
+  if (!!storageItem) {
+    storageItem = JSON.parse(localStorage.getItem(name));
+  } else {
+    storageItem = [];
+  }
+
+  return storageItem;
+};
+
+const setStorageItem = (name, item) => {
+  localStorage.setItem(name, JSON.stringify(item));
+};
+
+export {
+  getElement,
+  allProductsUrl,
+  singleProductUrl,
+  createRange,
+  getStorageItem,
+  setStorageItem,
+};
