@@ -902,8 +902,7 @@ Featured Section
 ==================
 */
 .featured {
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding: 3rem 0;
 }
 
 .featured .title {
