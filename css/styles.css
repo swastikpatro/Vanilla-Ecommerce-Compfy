@@ -1352,6 +1352,7 @@ section.products {
 .price-filter {
   background: var(--grey-500) !important;
   color: var(--grey-500);
+  cursor: pointer;
 }
 
 .price-value {
