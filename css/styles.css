@@ -954,7 +954,7 @@ Featured Section
   /* border: 2px solid red; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  align-items: center;
+  align-content: space-between;
   gap: 2rem;
   position: relative;
 }
