@@ -32,16 +32,6 @@ const setActiveToAllAndDisplayAll = () => {
   displayProducts(store, productsContainer, true);
 };
 
-const filterProducts = (data) => {
-  return function (prop, val) {
-    return [
-      ...data.filter((singleData) =>
-        singleData[prop].includes(val.toLowerCase())
-      ),
-    ];
-  };
-};
-
 const displayError = (errorMsg) => {
   productsContainer.innerHTML = `
   <div class="filter-error">
@@ -53,7 +43,10 @@ const displayError = (errorMsg) => {
 const filterOnSearchAndPriceThenDisplay = (searchValue, sliderValue) => {
   const filteredProducts = store.filter((singleData) => {
     const singlePrice = singleData.price / 100;
-    return singlePrice <= sliderValue && singleData.name.includes(searchValue);
+    return (
+      singlePrice <= sliderValue &&
+      singleData.name.includes(searchValue.toLowerCase())
+    );
   });
 
   if (filteredProducts.length > 0) {
@@ -129,10 +122,9 @@ const handleCompanyBtnsClick = (e) => {
     return;
   }
 
-  const filteredProductsOnCompanyClick = filterProducts(store)(
-    'company',
-    btnClickedName
-  );
+  const filteredProductsOnCompanyClick = store.filter((single) => {
+    return single.company === btnClickedName.toLowerCase();
+  });
 
   displayProducts(filteredProductsOnCompanyClick, productsContainer, true);
 };
