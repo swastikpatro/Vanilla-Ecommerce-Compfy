@@ -1483,6 +1483,12 @@ Single Product Page
   margin-top: 0;
 }
 
+.addToCartBtn,
+.home-link {
+  width: fit-content;
+  display: block;
+}
+
 /* skeleton single product */
 
 .skeleton-single-product-info .single-product-desc {
@@ -1565,4 +1571,11 @@ Single Product Page
     left: 40%;
     margin-left: 0;
   }
+}
+
+.error {
+  color: red;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: var(--letterSpacing);
 }
