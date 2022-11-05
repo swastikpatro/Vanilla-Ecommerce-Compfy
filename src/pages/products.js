@@ -2,47 +2,90 @@ import '../toggleSidebar.js';
 import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
 
-import { getElement, allProductsUrl } from '../utils.js';
-import {
-  displayProducts,
-  fetchProducts,
-  skeletonLoad,
-} from '../displayProducts.js';
+import { debounce, getElement } from '../utils.js';
+import { displayProducts } from '../displayProducts.js';
+import { store } from '../store.js';
 
 const productsContainer = getElement('.products-container');
 const companiesDOM = getElement('.products .companies');
 const searchBar = getElement('.search-input');
 const rangeInput = getElement('.price-filter');
 const priceValue = getElement('.price-value span');
-const MAX_PRICE_VALUE = 80;
-let currActive;
 
-function getCompanies(data) {
-  return ['all', ...new Set(data.map(({ fields: { company } }) => company))];
-}
+const getCompanies = (data) => {
+  return ['all', ...new Set(data.map(({ company }) => company))];
+};
 
-function removeActiveCompanyBtn() {
-  currActive = document.querySelector('.active-company-btn');
+const removeActiveCompanyBtn = () => {
+  const currActive = document.querySelector('.active-company-btn');
   if (!!currActive) {
     currActive.classList.remove('active-company-btn');
   }
-}
+};
 
-async function fetchAllDataAndDisplay() {
-  const allProducts = await fetchProducts(allProductsUrl, productsContainer);
-  productsContainer.innerHTML = displayProducts(allProducts);
-}
-
-async function setActiveToAllAndDisplayAll() {
+const setActiveToAllAndDisplayAll = () => {
   removeActiveCompanyBtn();
   getElement('.companies').firstElementChild.classList.add(
     'active-company-btn'
   );
 
-  fetchAllDataAndDisplay();
-}
+  displayProducts(store, productsContainer, true);
+};
 
-function displayCompanies(data) {
+const filterProducts = (data) => {
+  return function (prop, val) {
+    return [
+      ...data.filter((singleData) =>
+        singleData[prop].includes(val.toLowerCase())
+      ),
+    ];
+  };
+};
+
+const displayError = (errorMsg) => {
+  productsContainer.innerHTML = `
+  <div class="filter-error">
+    ${errorMsg}  
+  </div>
+  `;
+};
+
+const filterOnSearchAndPriceThenDisplay = (searchValue, sliderValue) => {
+  const filteredProducts = store.filter((singleData) => {
+    const singlePrice = singleData.price / 100;
+    return singlePrice <= sliderValue && singleData.name.includes(searchValue);
+  });
+
+  if (filteredProducts.length > 0) {
+    displayProducts(filteredProducts, productsContainer, true);
+  } else {
+    displayError(
+      `${
+        searchValue === ''
+          ? `No Products found Under $${sliderValue}`
+          : `No Match found for "${searchValue} under $${sliderValue}"`
+      }`
+    );
+  }
+};
+
+const getMaxPrice = (data) => {
+  const pricesArr = data.map((singleData) => singleData.price);
+  const maxPrice = Math.max(...pricesArr) / 100;
+  return Math.ceil(maxPrice);
+};
+
+const setPriceValue = (val) => {
+  rangeInput.value = val;
+  priceValue.innerText = '$' + val;
+};
+
+const displayPrice = (data) => {
+  const maxValue = getMaxPrice(data);
+  setPriceValue(maxValue);
+};
+
+const displayCompanies = (data) => {
   const myCompanies = getCompanies(data);
   companiesDOM.innerHTML = myCompanies
     .map(
@@ -52,63 +95,50 @@ function displayCompanies(data) {
         }" data-btn="${singleCompany}">${singleCompany}</button>`
     )
     .join('');
-}
+};
 
-async function init() {
-  productsContainer.innerHTML = skeletonLoad(12);
+const handlePriceFilter = (e) => {
+  removeActiveCompanyBtn();
 
-  const allProductData = await fetchProducts(allProductsUrl, productsContainer);
+  const price = e.target.valueAsNumber;
 
-  // console.log(allProductData);
+  setPriceValue(price);
 
-  if (allProductData === undefined) {
+  filterOnSearchAndPriceThenDisplay(searchBar.value, price);
+};
+
+const handleCompanyBtnsClick = (e) => {
+  if (!e.target.classList.contains('company-btn')) {
     return;
   }
 
-  productsContainer.innerHTML = displayProducts(allProductData);
-  displayCompanies(allProductData);
+  searchBar.value = '';
 
-  return allProductData;
-}
+  removeActiveCompanyBtn();
 
-function debounce(func, delay) {
-  let timeoutID;
+  setPriceValue(getMaxPrice(store));
 
-  return function (...args) {
-    if (!!timeoutID) {
-      clearTimeout(timeoutID);
-    }
+  const btnClickedEle = e.target;
 
-    timeoutID = setTimeout(() => {
-      func(...args);
-    }, delay);
-  };
-}
+  btnClickedEle.classList.add('active-company-btn');
 
-function filterProducts(data) {
-  return function (prop, val) {
-    return [
-      ...data.filter((singleData) => {
-        // console.log(
-        //   singleData.fields[prop],
-        //   val.toLowerCase(),
-        //   singleData.fields[prop].includes(val.toLowerCase())
-        // );
-        return singleData.fields[prop].includes(val.toLowerCase());
-      }),
-    ];
-  };
-}
+  const btnClickedName = btnClickedEle.dataset.btn;
 
-async function handleSearch(e) {
-  // console.log(e.target.value);
+  if (btnClickedName === 'all') {
+    displayProducts(store, productsContainer, true);
+    return;
+  }
 
-  const allProducts = await fetchProducts(allProductsUrl, productsContainer);
-
-  const filteredProductsOnSearch = filterProducts(allProducts)(
-    'name',
-    e.target.value
+  const filteredProductsOnCompanyClick = filterProducts(store)(
+    'company',
+    btnClickedName
   );
+
+  displayProducts(filteredProductsOnCompanyClick, productsContainer, true);
+};
+
+const handleSearch = (e) => {
+  // console.log(e.target.value);
 
   if (e.target.value === '') {
     setActiveToAllAndDisplayAll();
@@ -116,62 +146,14 @@ async function handleSearch(e) {
     removeActiveCompanyBtn();
   }
 
-  if (filteredProductsOnSearch.length > 0) {
-    productsContainer.innerHTML = displayProducts(filteredProductsOnSearch);
-  } else if (filteredProductsOnSearch.length === 0) {
-    productsContainer.innerHTML = `<div class="filter-error">No Match found for "${e.target.value}"</div>`;
-  }
-}
+  filterOnSearchAndPriceThenDisplay(e.target.value, rangeInput.valueAsNumber);
+};
 
-async function handleCompanyBtnsClick(e) {
-  if (!e.target.classList.contains('company-btn')) {
-    return;
-  }
-
-  // debugger;
-  searchBar.value = '';
-  removeActiveCompanyBtn();
-  setPriceValue(MAX_PRICE_VALUE);
-  const btnClickedEle = e.target;
-  btnClickedEle.classList.add('active-company-btn');
-  const btnClickedName = btnClickedEle.dataset.btn;
-  const allProducts = await fetchProducts(allProductsUrl, productsContainer);
-  if (btnClickedName === 'all') {
-    productsContainer.innerHTML = displayProducts(allProducts);
-    return;
-  }
-
-  const filteredProductsOnCompanyClick = filterProducts(allProducts)(
-    'company',
-    btnClickedName
-  );
-
-  productsContainer.innerHTML = displayProducts(filteredProductsOnCompanyClick);
-}
-
-function setPriceValue(val) {
-  rangeInput.value = val;
-  priceValue.innerText = '$' + val;
-}
-
-async function handlePriceFilter(e) {
-  removeActiveCompanyBtn();
-  searchBar.value = '';
-  const price = e.target.valueAsNumber;
-  setPriceValue(price);
-  const allProducts = await fetchProducts(allProductsUrl, productsContainer);
-
-  const filteredProductsOnPrice = allProducts.filter((single) => {
-    const singlePrice = single.fields.price / 100;
-    return singlePrice <= price;
-  });
-
-  if (filteredProductsOnPrice.length > 0) {
-    productsContainer.innerHTML = displayProducts(filteredProductsOnPrice);
-  } else if (filteredProductsOnPrice.length === 0) {
-    productsContainer.innerHTML = `<div class="filter-error">No Match found for "$${e.target.value}"</div>`;
-  }
-}
+const init = () => {
+  displayProducts(store, productsContainer);
+  displayCompanies(store);
+  displayPrice(store);
+};
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -182,15 +164,15 @@ searchBar.addEventListener(
   }, 500)
 );
 
-searchBar.addEventListener('click', async () => {
-  setPriceValue(MAX_PRICE_VALUE);
+searchBar.addEventListener('click', () => {
+  // setPriceValue(MAX_PRICE_VALUE);
   if (!searchBar.value) {
     removeActiveCompanyBtn();
-    fetchAllDataAndDisplay();
-    return;
+
+    displayProducts(store, productsContainer, true);
   }
 });
 
-rangeInput.addEventListener('change', handlePriceFilter);
+rangeInput.addEventListener('input', handlePriceFilter);
 
 companiesDOM.addEventListener('click', handleCompanyBtnsClick);
