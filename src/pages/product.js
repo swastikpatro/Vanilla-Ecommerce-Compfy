@@ -3,7 +3,9 @@ import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
 
 import { getElement, singleProductUrl } from '../utils.js';
+import { addToCart } from '../cart/setupCart.js';
 const productPage = getElement('.single-product');
+const btn = getElement('.addToCartBtn');
 
 function renderSkeletonData() {
   productPage.innerHTML = `
@@ -69,7 +71,7 @@ function renderData(data) {
             <p class="single-product-desc">
               ${description}
             </p>
-            <button class="addToCartBtn btn" data-id="id">add to cart</button>
+            <button class="addToCartBtn btn" data-id="${id}">add to cart</button>
           </div>
         </article>
       `;
@@ -82,13 +84,22 @@ function renderData(data) {
 }
 
 async function displaySingleProduct(singleProductUrl) {
+  const param = new URLSearchParams(window.location.search);
+  const productID = param.get('id');
   try {
-    const param = new URLSearchParams(window.location.search);
-    const productID = param.get('id');
-
     const response = await fetch(`${singleProductUrl}${productID}`);
-    if (!response.ok) {
-      throw new Error("Can't fetch data");
+    if (response.status < 200 || response.status > 299) {
+      productPage.innerHTML = `
+      <div class='section-center single-product-center'>
+        <div>
+          <div class="error">Sorry, something went wrong.</div>
+          <a href="index.html" class="home-link btn">
+            home
+          </a>
+        </div>
+      </div>`;
+
+      return;
     }
 
     const singleData = await response.json();
@@ -102,4 +113,14 @@ renderSkeletonData();
 
 window.addEventListener('DOMContentLoaded', () => {
   displaySingleProduct(singleProductUrl);
+  // window.addEventListener('click', (e) => {
+  //   // console.log(e.target.className);
+  //   if (e.target.closest('.addToCartBtn')) {
+  //     addToCart(e.target.closest('.addToCartBtn').dataset.id);
+  //     return;
+  //   }
+  // });
+
+  // btn = document.querySelector('.btn');
+  btn.addEventListener('click', (e) => addToCart(e.target.dataset.id));
 });
