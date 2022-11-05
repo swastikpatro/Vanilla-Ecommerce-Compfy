@@ -1,13 +1,10 @@
-import { createRange } from './utils.js';
+import { addToCart } from './cart/setupCart.js';
+import { createRange, formatPrice } from './utils.js';
 
-function displayProducts(dataArr = []) {
-  return dataArr
+function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
+  container.innerHTML = dataArr
     .map((singleProduct) => {
-      const {
-        fields: { name, price, image },
-        id,
-      } = singleProduct;
-      const [{ url: myImage }] = image;
+      const { name, price, img: myImage, id } = singleProduct;
       return `
       <article class="product">
           <div class="product-container">
@@ -23,7 +20,7 @@ function displayProducts(dataArr = []) {
                   <i class="fa-solid fa-search"></i>
                 </a>
 
-                <button class="product-cart-btn product-icon" data-id="1">
+                <button class="product-cart-btn product-icon" data-id="${id}">
                   <i class="fa-solid fa-shopping-cart"></i>
                 </button>
               </div>
@@ -32,12 +29,23 @@ function displayProducts(dataArr = []) {
 
           <footer>
             <p class="product-name">${name}</p>
-            <h4 class="product-price">$${price / 100}</h4>
+            <h4 class="product-price">${formatPrice(price)}</h4>
           </footer>
         </article>
     `;
     })
     .join('');
+
+  if (displayingNotOnInit) return;
+
+  container.addEventListener('click', (e) => {
+    const clickedOnProductIcon = e.target.closest('.product-cart-btn');
+    if (!clickedOnProductIcon) {
+      return;
+    }
+
+    addToCart(clickedOnProductIcon.dataset.id);
+  });
 }
 
 function skeletonLoad(productCount) {

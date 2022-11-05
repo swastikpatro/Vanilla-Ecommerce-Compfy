@@ -28,7 +28,7 @@ async function indexInit() {
     return featured;
   });
 
-  featuredContainer.innerHTML = displayProducts(featuredProducts);
+  displayProducts(featuredProducts, featuredContainer);
 }
 
 window.addEventListener('DOMContentLoaded', indexInit);
