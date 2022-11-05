@@ -113,14 +113,19 @@ renderSkeletonData();
 
 window.addEventListener('DOMContentLoaded', () => {
   displaySingleProduct(singleProductUrl);
+
+  // Following code works
   // window.addEventListener('click', (e) => {
   //   // console.log(e.target.className);
   //   if (e.target.closest('.addToCartBtn')) {
-  //     addToCart(e.target.closest('.addToCartBtn').dataset.id);
+  //     console.log(e.target.closest('.addToCartBtn').dataset.id);
   //     return;
   //   }
   // });
 
+  // The below one doesnot work
   // btn = document.querySelector('.btn');
-  btn.addEventListener('click', (e) => addToCart(e.target.dataset.id));
+  btn.addEventListener('click', (e) => {
+    console.log(e.target.dataset.id);
+  });
 });
