@@ -853,6 +853,7 @@ Cart
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.15rem;
 }
 
 .cart-count {
@@ -864,15 +865,27 @@ Cart
 }
 
 .count-btn {
-  background: transparent;
   border-color: transparent;
-  color: var(--primary-500);
-  cursor: pointer;
+  background: transparent;
+  font-size: 1.25rem;
+  color: var(--primary-800);
   transition: var(--transition);
+  cursor: pointer;
+  text-transform: capitalize;
 }
 
-.count-btn:hover {
-  color: var(--primary-700);
+.count-btn.increment-count {
+  color: green;
+}
+.count-btn.increment-count:hover {
+  color: var(--green-dark);
+}
+
+.count-btn.decrement-count {
+  color: red;
+}
+.count-btn.decrement-count:hover {
+  color: var(--red-dark);
 }
 
 /*
@@ -1491,24 +1504,24 @@ Single Product Page
 
 /* skeleton single product */
 
-.skeleton-single-product-info .single-product-desc {
+.skeleton-single-product-info .skeleton-single-product-desc {
   max-width: 30em;
   margin-top: 0;
   margin-bottom: 2rem;
 }
 
-.skeleton-single-product-info .single-product-desc div {
+.skeleton-single-product-info .skeleton-single-product-desc div {
   width: 100%;
   height: 0.75rem;
   margin-bottom: 0.5rem;
   animation: skeleton-loading 1s linear infinite alternate;
 }
 
-.skeleton-single-product-info .single-product-desc div:last-of-type {
+.skeleton-single-product-info .skeleton-single-product-desc div:last-of-type {
   width: 75%;
 }
 
-.skeleton-single-product-info .btn {
+.skeleton-single-product-info .skeleton-btn {
   width: fit-content;
   height: 2rem;
   padding: 0.25rem 0.5rem;
@@ -1518,14 +1531,14 @@ Single Product Page
   animation: skeleton-loading-dark 1s linear infinite alternate;
 }
 
-.skeleton-single-product-info .single-product-title {
+.skeleton-single-product-info .skeleton-single-product-title {
   width: 20rem;
   height: 2rem;
   margin-bottom: 0.5rem;
   animation: skeleton-loading-dark 1s linear infinite alternate;
 }
 
-.skeleton-single-product-info .single-product-company {
+.skeleton-single-product-info .skeleton-single-product-company {
   width: 10rem;
   height: 1.5rem;
   animation: skeleton-loading 1s linear infinite alternate;
