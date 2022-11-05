@@ -31,6 +31,29 @@ const setStorageItem = (name, item) => {
   localStorage.setItem(name, JSON.stringify(item));
 };
 
+const formatPrice = (price) => {
+  let formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format((price / 100).toFixed(2));
+
+  return formattedPrice;
+};
+
+const debounce = (func, delay) => {
+  let timeoutID;
+
+  return function (...args) {
+    if (!!timeoutID) {
+      clearTimeout(timeoutID);
+    }
+
+    timeoutID = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};
+
 export {
   getElement,
   allProductsUrl,
@@ -38,4 +61,6 @@ export {
   createRange,
   getStorageItem,
   setStorageItem,
+  formatPrice,
+  debounce,
 };
