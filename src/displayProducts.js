@@ -6,7 +6,7 @@ function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
     .map((singleProduct) => {
       const { name, price, img: myImage, id } = singleProduct;
       return `
-      <article class="product">
+      <article class="product skeleton-product">
           <div class="product-container">
             <img src="${myImage}" alt="${name}" class="product-img img skeleton-img" />
 
@@ -14,7 +14,6 @@ function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
               <div class="product-icons">
                 <a
                   href="product.html?id=${id}"
-                  target="_blank"
                   class="product-icon"
                 >
                   <i class="fa-solid fa-search"></i>
