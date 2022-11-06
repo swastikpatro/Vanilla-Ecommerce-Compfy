@@ -396,6 +396,7 @@ Compfy
 .toggle-container {
   position: relative;
   margin-top: 0.75rem;
+  cursor: pointer;
 }
 
 .toggle-cart {
@@ -403,11 +404,10 @@ Compfy
   border-color: transparent;
   font-size: 1.5rem;
   color: var(--white);
-  cursor: pointer;
   transition: var(--transition);
 }
 
-.toggle-cart:hover {
+.toggle-container:hover .toggle-cart {
   color: var(--grey-300);
 }
 
@@ -617,7 +617,7 @@ body.overlay-active {
   opacity: 0;
   display: grid;
   place-items: center;
-  z-index: 999;
+  z-index: 10;
 }
 
 .sidebar-overlay.show-sidebar {
@@ -727,7 +727,7 @@ Cart
   background: rgba(0, 0, 0, 0.75);
   pointer-events: none;
   opacity: 0;
-  z-index: 999;
+  z-index: 10;
 }
 
 .cart-overlay.show-cart {
@@ -1586,4 +1586,21 @@ Single Product Page
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   letter-spacing: var(--letterSpacing);
+}
+
+.alert {
+  position: absolute;
+  width: fit-content;
+  text-align: center;
+  letter-spacing: var(--letterSpacing);
+  right: 1rem;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.alert.show-alert {
+  opacity: 1;
+  pointer-events: all;
 }
