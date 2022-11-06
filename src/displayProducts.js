@@ -16,10 +16,12 @@ function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
                   href="product.html?id=${id}"
                   class="product-icon"
                 >
+                  More info
                   <i class="fa-solid fa-search"></i>
                 </a>
 
                 <button class="product-cart-btn product-icon" data-id="${id}">
+                  Add To Cart
                   <i class="fa-solid fa-shopping-cart"></i>
                 </button>
               </div>

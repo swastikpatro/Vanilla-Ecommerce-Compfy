@@ -1034,25 +1034,20 @@ Product
 }
 
 .product-icons {
-  width: 6rem;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-}
-
-.product-icons a i,
-.product-icons button i {
-  font-size: 1rem;
+  justify-content: center;
+  gap: 0 2rem;
 }
 
 .product-icons a,
 .product-icons button {
   display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: grid;
-  place-items: center;
+  width: fit-content;
+  font-size: 1rem;
+  padding: 0.5rem;
   background: var(--primary-600);
-  border-radius: 50%;
+  border-radius: var(--borderRadius);
   color: var(--white);
   border: 3px solid var(--primary-300);
   cursor: pointer;
