@@ -86,6 +86,8 @@ function renderData(data) {
   </div>
   `;
 
+  getElement('.page-hero-title').innerText = `Home / ${name}`;
+
   return productPage;
 }
 
