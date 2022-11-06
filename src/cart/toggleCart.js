@@ -1,11 +1,12 @@
 import { getElement } from '../utils.js';
 import { displayCart } from './setupCart.js';
 
+const toggleContainer = getElement('.toggle-container');
 const toggleCartBtn = getElement('.toggle-cart');
 const cartOverlay = getElement('.cart-overlay');
 const cartCloseBtn = getElement('.cart-close');
 
-toggleCartBtn.addEventListener('click', () => {
+toggleContainer.addEventListener('click', () => {
   cartOverlay.classList.add('show-cart');
   document.body.classList.add('overlay-active');
   displayCart(
