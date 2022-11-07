@@ -21,8 +21,8 @@ function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
                 </a>
 
                 <button class="product-cart-btn product-icon" data-id="${id}">
-                  Add To Cart
-                  <i class="fa-solid fa-shopping-cart"></i>
+                  Add To
+                  <i class="fa-solid fa-cart-plus"></i>
                 </button>
               </div>
             </div>
