@@ -80,7 +80,7 @@ function getIdFindProductAndHandleDOM({ itemID, toDo, myCart, myContainer }) {
 
       // notify if decrement-btn clicked when count === 1
       if (item.count === 1) {
-        notify('success', `Removed All ${capitalize(item.name)} from Cart ✅`);
+        notify('success', `Removed ${capitalize(item.name)} from Cart ✅`);
       }
 
       item.count--;
