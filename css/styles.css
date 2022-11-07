@@ -1603,11 +1603,6 @@ Single Product Page
   /* transition: var(--transition); */
 }
 
-.alert-success {
-  background: var(--green-dark);
-  color: var(--green-light);
-}
-
 .alert.show-alert {
   transform: scale(1);
   opacity: 1;
