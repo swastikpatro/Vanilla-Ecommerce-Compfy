@@ -1593,16 +1593,19 @@ Single Product Page
 .toast-container {
   position: fixed;
   top: 1rem;
-  left: 0.75rem;
+  left: 0.5rem;
   display: grid;
   justify-items: start;
   gap: 1.25rem 0;
   /* border: 2px solid red; */
   z-index: 999;
+  width: 100vw;
   pointer-events: none;
 }
 
 .toast {
+  width: 97%;
+  max-width: fit-content;
   border: 2.5px solid var(--white);
   font-size: 1.15rem;
   padding: 0.25em 0.5em;
