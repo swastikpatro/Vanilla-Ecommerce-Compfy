@@ -9,7 +9,6 @@ const cartItemsContainer = getElement('.cart-items');
 const cartItemCountInNav = getElement('.cart-item-count');
 const cartTotalEle = getElement('.cart-total');
 const alertEle = getElement('.alert');
-let scrollPosition = 0;
 
 // const cartTotal = getElement('.cart-items');
 
