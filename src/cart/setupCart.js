@@ -152,8 +152,4 @@ function init() {
 
 init();
 
-window.addEventListener('scroll', (e) => {
-  getElement('.alert').style.top = e.currentTarget.scrollY + 10 + 'px';
-});
-
 export { addToCart, cart, displayCart };
