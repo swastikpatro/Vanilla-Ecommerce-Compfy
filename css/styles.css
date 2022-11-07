@@ -1592,6 +1592,7 @@ Single Product Page
 
 .alert {
   position: absolute;
+  top: 0;
   width: fit-content;
   text-align: center;
   letter-spacing: var(--letterSpacing);
@@ -1599,12 +1600,10 @@ Single Product Page
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transform: scale(0);
   /* transition: var(--transition); */
 }
 
 .alert.show-alert {
-  transform: scale(1);
   opacity: 1;
   pointer-events: all;
 }
