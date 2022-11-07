@@ -1590,22 +1590,39 @@ Single Product Page
   letter-spacing: var(--letterSpacing);
 }
 
-.alert {
+.toast-container {
   position: fixed;
   top: 1rem;
-  width: fit-content;
-  text-align: center;
-  letter-spacing: var(--letterSpacing);
-  right: 1rem;
-  z-index: 1000;
-  opacity: 0;
+  left: 1.5rem;
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem 0;
+  /* border: 2px solid red; */
+  z-index: 999;
   pointer-events: none;
-  transform: scale(0);
-  transition: var(--transition);
 }
 
-.alert.show-alert {
-  transform: scale(1);
-  opacity: 1;
-  pointer-events: all;
+.toast {
+  border: 2.5px solid var(--white);
+  font-size: 1.15rem;
+  padding: 0.25em 0.5em;
+  border-radius: var(--borderRadius);
+  background: var(--green-light);
+  color: var(--green-dark);
+  letter-spacing: var(--letterSpacing);
+  animation: on-and-off-toast 3000ms forwards ease-in-out;
+}
+
+@keyframes on-and-off-toast {
+  0%,
+  100% {
+    transform: translateY(-150%) scale(0);
+    opacity: 0;
+  }
+
+  10%,
+  90% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
 }

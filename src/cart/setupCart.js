@@ -8,7 +8,7 @@ import { addToCartDOM } from './addToCartDOM.js';
 const cartItemsContainer = getElement('.cart-items');
 const cartItemCountInNav = getElement('.cart-item-count');
 const cartTotalEle = getElement('.cart-total');
-const alertEle = getElement('.alert');
+let toastContainer;
 
 // const cartTotal = getElement('.cart-items');
 
@@ -20,15 +20,6 @@ if (cart.length < 1) {
   totalCount = 0;
   cart = [...deepClone(store)];
   cart.forEach((single) => (single['count'] = 0));
-}
-
-function notify(type, msg) {
-  alertEle.innerText = msg;
-  alertEle.classList.add(`alert-${type}`, 'show-alert');
-
-  setTimeout(() => {
-    alertEle.classList.remove(`alert-${type}`, 'show-alert');
-  }, 700);
 }
 
 const addToCart = (clickedID) => {
@@ -44,9 +35,16 @@ const addToCart = (clickedID) => {
   // console.log(cart);
   const isInCartAndIndex = cart.findIndex((single) => single.id === clickedID);
   cart[isInCartAndIndex].count += 1;
-  notify(
-    'success',
-    `Added '${capitalize(cart[isInCartAndIndex].name)}' To Cart ✅`
+  // notify(
+  //   'success',
+  //   `Added '${capitalize(cart[isInCartAndIndex].name)}' To Cart ✅`
+  // );
+
+  addAndRemoveToast(
+    2000,
+    `Added '<span style="color: #222">${capitalize(
+      cart[isInCartAndIndex].name
+    )}</span>' To Cart ✅`
   );
   displayCart(cartItemsContainer, cartItemCountInNav, cartTotalEle);
 };
@@ -57,7 +55,7 @@ function capitalizeSingleWord(word) {
 
 function capitalize(text) {
   return text
-    .split('-')
+    .split(' ')
     .map((singleWord) => capitalizeSingleWord(singleWord))
     .join(' ');
 }
@@ -67,11 +65,22 @@ function getIdFindProductAndHandleDOM({ itemID, toDo, myCart, myContainer }) {
   switch (toDo) {
     case 'remove':
       item.count = 0;
-      notify('success', `Removed All ${capitalize(item.name)}'s from Cart ✅`);
+      addAndRemoveToast(
+        3000,
+        `Removed All <span style="color: #222; text-decoration: line-through red">${capitalize(
+          item.name
+        )}</span>'s from Cart ✅`
+      );
       break;
     case 'increment':
       item.count++;
       // notify('success', `+1 ${capitalize(item.name)} To Cart ✅`);
+      addAndRemoveToast(
+        2000,
+        `+1 '<span style="color: #222">${capitalize(
+          item.name
+        )}</span>' to Cart ✅`
+      );
       break;
     case 'decrement':
       if (item.count < 0) {
@@ -79,10 +88,15 @@ function getIdFindProductAndHandleDOM({ itemID, toDo, myCart, myContainer }) {
       }
 
       // notify if decrement-btn clicked when count === 1
-      if (item.count === 1) {
-        notify('success', `Removed ${capitalize(item.name)} from Cart ✅`);
-      }
+      // if (item.count === 1) {
+      // }
 
+      addAndRemoveToast(
+        3000,
+        `<span style="color: red;">-1</span> '<span style="color: #222">${capitalize(
+          item.name
+        )}</span>' from Cart ✅`
+      );
       item.count--;
       break;
     default:
@@ -148,8 +162,25 @@ function displayCartCount() {
 function init() {
   displayCartCount();
   displayCart(cartItemsContainer, cartItemCountInNav, cartTotalEle);
+  document.body.insertAdjacentHTML(
+    'afterbegin',
+    `<div class='toast-container'></div>`
+  );
+
+  toastContainer = getElement('.toast-container');
 }
 
 init();
 
 export { addToCart, cart, displayCart };
+
+function addAndRemoveToast(activeDuration = 3000, msg) {
+  toastContainer.insertAdjacentHTML(
+    'beforeend',
+    `<div class="toast" style="animation-duration: ${activeDuration}ms">${msg}</div>`
+  );
+  let toastToRemove = toastContainer.lastElementChild;
+  toastToRemove.addEventListener('animationend', () => {
+    toastToRemove.remove();
+  });
+}
