@@ -28,7 +28,7 @@ function notify(type, msg) {
 
   setTimeout(() => {
     alertEle.classList.remove(`alert-${type}`, 'show-alert');
-  }, 1000);
+  }, 700);
 }
 
 const addToCart = (clickedID) => {
