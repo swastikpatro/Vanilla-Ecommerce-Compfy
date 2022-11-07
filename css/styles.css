@@ -337,6 +337,7 @@ Compfy
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: var(--transition);
 }
 
 .navbar.nav-sticky {
