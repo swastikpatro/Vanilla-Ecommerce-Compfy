@@ -412,13 +412,13 @@ Compfy
   background: transparent;
   border-color: transparent;
   font-size: 1.5rem;
-  color: var(--primary-400);
+  color: var(--primary-200);
   cursor: pointer;
   transition: var(--transition);
 }
 
 .toggle-container:hover .toggle-cart {
-  color: var(--primary-500);
+  color: var(--primary-300);
 }
 
 .cart-item-count {
@@ -1617,7 +1617,7 @@ Single Product Page
   width: 97%;
   max-width: fit-content;
   border: 2.5px solid var(--white);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   padding: 0.25em 0.5em;
   border-radius: var(--borderRadius);
   background: var(--green-light);
@@ -1627,8 +1627,12 @@ Single Product Page
 }
 
 @media screen and (min-width: 800px) {
+  .toast-container {
+    left: 2.5rem;
+  }
+
   .toast {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }
 
