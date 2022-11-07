@@ -18,7 +18,7 @@ const addToCartDOM = (cartProducts, container, navCart, totalAmountEle) => {
   container.innerHTML = cartProducts
     .map((singleProduct) => {
       const { id, name, price, img, count } = singleProduct;
-      // console.log(amount);
+      // console.log(count);
       return count > 0
         ? `
     <article class="cart-item" data-id="${id}" >
@@ -27,7 +27,9 @@ const addToCartDOM = (cartProducts, container, navCart, totalAmountEle) => {
       <div class="cart-info">
         <h4>${name}</h4>
         <p>${formatPrice(price)}</p>
-        <button class="remove-btn" data-btn>remove</button>
+        <button class="remove-btn" data-btn>
+          remove
+        </button>
       </div>
   
       <div class="counter">
@@ -60,4 +62,4 @@ const addToCartDOM = (cartProducts, container, navCart, totalAmountEle) => {
   return container;
 };
 
-export default addToCartDOM;
+export { addToCartDOM };
