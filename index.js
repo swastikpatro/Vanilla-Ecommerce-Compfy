@@ -32,7 +32,3 @@ async function indexInit() {
 }
 
 window.addEventListener('DOMContentLoaded', indexInit);
-
-window.addEventListener('scroll', (e) => {
-  getElement('.alert').style.top = e.currentTarget.scrollY + 10 + 'px';
-});

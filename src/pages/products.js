@@ -168,7 +168,3 @@ searchBar.addEventListener('click', () => {
 rangeInput.addEventListener('input', handlePriceFilter);
 
 companiesDOM.addEventListener('click', handleCompanyBtnsClick);
-
-window.addEventListener('scroll', (e) => {
-  getElement('.alert').style.top = e.currentTarget.scrollY + 10 + 'px';
-});

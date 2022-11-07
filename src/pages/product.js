@@ -141,7 +141,3 @@ window.addEventListener('DOMContentLoaded', async () => {
   // The below one doesnot work
   // btn = document.querySelector('.btn');
 });
-
-window.addEventListener('scroll', (e) => {
-  getElement('.alert').style.top = e.currentTarget.scrollY + 10 + 'px';
-});

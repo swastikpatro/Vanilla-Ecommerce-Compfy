@@ -1591,8 +1591,8 @@ Single Product Page
 }
 
 .alert {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 1rem;
   width: fit-content;
   text-align: center;
   letter-spacing: var(--letterSpacing);
