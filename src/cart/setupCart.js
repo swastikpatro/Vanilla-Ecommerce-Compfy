@@ -153,7 +153,7 @@ function init() {
 init();
 
 window.addEventListener('scroll', (e) => {
-  alertEle.style.top = e.currentTarget.scrollY + 10 + 'px';
+  getElement('.alert').style.top = e.currentTarget.scrollY + 10 + 'px';
 });
 
 export { addToCart, cart, displayCart };
