@@ -1,7 +1,7 @@
 import { findProduct, store } from '../store.js';
 import { deepClone, getElement, getStorageItem } from '../utils.js';
 
-import addToCartDOM from './addToCartDOM.js';
+import { addToCartDOM } from './addToCartDOM.js';
 // import { openCart } from './toggleCart.js';
 
 // const cartItemCountDOM = getElement('.cart-count');
@@ -24,28 +24,30 @@ if (cart.length < 1) {
 }
 
 function notify(type, msg) {
-  const positionToShowAlert = window.scrollY;
   alertEle.innerText = msg;
-  alertEle.classList.add(`alert-${type}`);
-  alertEle.style.top = positionToShowAlert + 10 + 'px';
-  alertEle.style.opacity = 1;
-  // console.log(positionToShowAlert);
+  alertEle.classList.add(`alert-${type}`, 'show-alert');
 
   setTimeout(() => {
     alertEle.classList.remove(`alert-${type}`, 'show-alert');
-    alertEle.style.top = positionToShowAlert + 10 + 'px';
-    alertEle.style.opacity = 0;
-    // console.log(positionToShowAlert + 10, 'timeout');
   }, 1000);
 }
 
 const addToCart = (clickedID) => {
   // openCart();
+  if (cart.length < 1) {
+    totalCount = 0;
+    cart = [...deepClone(store)].map((single) => {
+      single['count'] = 0;
+      return single;
+    });
+  }
+
+  // console.log(cart);
   const isInCartAndIndex = cart.findIndex((single) => single.id === clickedID);
   cart[isInCartAndIndex].count += 1;
   notify(
     'success',
-    `Added "${capitalize(cart[isInCartAndIndex].name)}" To Cart ✅`
+    `Added '${capitalize(cart[isInCartAndIndex].name)}' To Cart ✅`
   );
   displayCart(cartItemsContainer, cartItemCountInNav, cartTotalEle);
 };
@@ -56,7 +58,7 @@ function capitalizeSingleWord(word) {
 
 function capitalize(text) {
   return text
-    .split(' ')
+    .split('-')
     .map((singleWord) => capitalizeSingleWord(singleWord))
     .join(' ');
 }
@@ -70,13 +72,18 @@ function getIdFindProductAndHandleDOM({ itemID, toDo, myCart, myContainer }) {
       break;
     case 'increment':
       item.count++;
-      // notify('success', `Added ${capitalize(item.name)} To Cart ✅`);
+      // notify('success', `+1 ${capitalize(item.name)} To Cart ✅`);
       break;
     case 'decrement':
       if (item.count < 0) {
         item.count = 0;
       }
-      // notify('success', `Deleted ${capitalize(item.name)} from Cart ✅`);
+
+      // notify if decrement-btn clicked when count === 1
+      if (item.count === 1) {
+        notify('success', `Removed All ${capitalize(item.name)} from Cart ✅`);
+      }
+
       item.count--;
       break;
     default:
@@ -87,7 +94,7 @@ function getIdFindProductAndHandleDOM({ itemID, toDo, myCart, myContainer }) {
 
 function handleCartClicks(e) {
   if (!('btn' in e.target.dataset)) {
-    console.log('clicked outside');
+    // console.log('clicked outside');
     return;
   }
 
@@ -146,9 +153,8 @@ function init() {
 
 init();
 
-// window.addEventListener('scroll', (e) => {
-//   scrollPosition = e.currentTarget.scrollY + 20;
-//   alertEle.style.top = scrollPosition + 'px';
-// });
+window.addEventListener('scroll', (e) => {
+  alertEle.style.top = e.currentTarget.scrollY + 10 + 'px';
+});
 
 export { addToCart, cart, displayCart };
