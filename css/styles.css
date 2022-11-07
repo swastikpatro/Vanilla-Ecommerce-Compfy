@@ -1593,7 +1593,7 @@ Single Product Page
 .toast-container {
   position: fixed;
   top: 1rem;
-  left: 1.5rem;
+  left: 0.75rem;
   display: grid;
   justify-items: start;
   gap: 1.25rem 0;
