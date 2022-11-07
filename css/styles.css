@@ -339,6 +339,15 @@ Compfy
   justify-content: center;
 }
 
+.navbar.nav-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  box-shadow: var(--shadow-2);
+  z-index: 5;
+}
+
 .nav-center {
   width: 90vw;
   max-width: 1170px;
@@ -403,29 +412,29 @@ Compfy
   background: transparent;
   border-color: transparent;
   font-size: 1.5rem;
-  color: var(--white);
+  color: var(--primary-400);
   cursor: pointer;
   transition: var(--transition);
 }
 
 .toggle-container:hover .toggle-cart {
-  color: var(--grey-300);
+  color: var(--primary-500);
 }
 
 .cart-item-count {
   position: absolute;
   top: -0.85rem;
-  right: -0.5rem;
+  right: -0.15rem;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background: var(--primary-500);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 2px solid var(--primary-300);
+  background: var(--white);
+  color: var(--primary-500);
+  display: grid;
+  place-items: center;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: var(--transition);
 }
 
@@ -1262,7 +1271,7 @@ section.products {
 
 .filters-container {
   position: sticky;
-  top: 1rem;
+  top: 6rem;
   padding: 0.25rem;
   border: 2px solid var(--grey-400);
   border-radius: var(--borderRadius);
@@ -1607,13 +1616,19 @@ Single Product Page
   width: 97%;
   max-width: fit-content;
   border: 2.5px solid var(--white);
-  font-size: 1.15rem;
+  font-size: 0.75rem;
   padding: 0.25em 0.5em;
   border-radius: var(--borderRadius);
   background: var(--green-light);
   color: var(--green-dark);
   letter-spacing: var(--letterSpacing);
   animation: on-and-off-toast 3000ms forwards ease-in-out;
+}
+
+@media screen and (min-width: 800px) {
+  .toast {
+    font-size: 1rem;
+  }
 }
 
 @keyframes on-and-off-toast {

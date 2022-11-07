@@ -1,6 +1,7 @@
 import '../toggleSidebar.js';
 import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
+import '../sticky-nav.js';
 
 import { debounce, getElement } from '../utils.js';
 import { displayProducts } from '../displayProducts.js';

@@ -1,6 +1,7 @@
 import '../toggleSidebar.js';
 import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
+import '../sticky-nav.js';
 
 import { formatPrice, getElement, singleProductUrl } from '../utils.js';
 import { addToCart } from '../cart/setupCart.js';
