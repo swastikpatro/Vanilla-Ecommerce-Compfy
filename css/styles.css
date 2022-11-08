@@ -1058,10 +1058,10 @@ Product
   width: fit-content;
   font-size: 1rem;
   padding: 0.5rem 0.6rem;
-  background: var(--primary-600);
+  background: var(--white);
   border-radius: 2rem;
-  color: var(--white);
-  border: 3px solid var(--primary-300);
+  color: var(--primary-500);
+  border: 3px solid var(--primary-200);
   cursor: pointer;
   letter-spacing: var(--letterSpacing);
   transition: var(--transition);
@@ -1069,7 +1069,15 @@ Product
 
 .product-icons a:hover,
 .product-icons button:hover {
+  color: var(--white);
   background: var(--primary-500);
+}
+
+@media screen and (min-width: 800px) {
+  .product-icons a:focus,
+  .product-icons button:focus {
+    transform: scale(1.05);
+  }
 }
 
 .product footer {
