@@ -3,8 +3,8 @@ import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
 import '../sticky-nav.js';
 
-import { debounce, getElement } from '../utils.js';
-import { displayProducts } from '../displayProducts.js';
+import { allProductsUrl, debounce, getElement } from '../utils.js';
+import { displayProducts, fetchProducts } from '../displayProducts.js';
 import { store } from '../store.js';
 
 const productsContainer = getElement('.products-container');
@@ -30,7 +30,7 @@ const setActiveToAllAndDisplayAll = () => {
     'active-company-btn'
   );
 
-  displayProducts(store, productsContainer, true);
+  displayProducts(store, productsContainer, false);
 };
 
 const displayError = (errorMsg) => {
@@ -51,7 +51,7 @@ const filterOnSearchAndPriceThenDisplay = (searchValue, sliderValue) => {
   });
 
   if (filteredProducts.length > 0) {
-    displayProducts(filteredProducts, productsContainer, true);
+    displayProducts(filteredProducts, productsContainer, false);
   } else {
     displayError(
       `${
@@ -119,7 +119,7 @@ const handleCompanyBtnsClick = (e) => {
   const btnClickedName = btnClickedEle.dataset.btn;
 
   if (btnClickedName === 'all') {
-    displayProducts(store, productsContainer, true);
+    displayProducts(store, productsContainer, false);
     return;
   }
 
@@ -127,7 +127,7 @@ const handleCompanyBtnsClick = (e) => {
     return single.company === btnClickedName.toLowerCase();
   });
 
-  displayProducts(filteredProductsOnCompanyClick, productsContainer, true);
+  displayProducts(filteredProductsOnCompanyClick, productsContainer, false);
 };
 
 const handleSearch = (e) => {
@@ -142,8 +142,14 @@ const handleSearch = (e) => {
   filterOnSearchAndPriceThenDisplay(e.target.value, rangeInput.valueAsNumber);
 };
 
-const init = () => {
-  displayProducts(store, productsContainer);
+const init = async () => {
+  if (store.length < 1) {
+    const allData = fetchProducts(allProductsUrl, productsContainer);
+    displayProducts(allData, productsContainer, true);
+  } else {
+    displayProducts(store, productsContainer, true);
+  }
+
   displayCompanies(store);
   displayPrice(store);
 };
@@ -172,7 +178,7 @@ searchBar.addEventListener('click', () => {
   if (!searchBar.value) {
     removeActiveCompanyBtn();
 
-    displayProducts(store, productsContainer, true);
+    displayProducts(store, productsContainer, false);
   }
 });
 
