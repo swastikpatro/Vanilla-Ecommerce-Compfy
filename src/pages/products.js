@@ -46,7 +46,7 @@ const filterOnSearchAndPriceThenDisplay = (searchValue, sliderValue) => {
     const singlePrice = singleData.price / 100;
     return (
       singlePrice <= sliderValue &&
-      singleData.name.includes(searchValue.toLowerCase())
+      singleData.name.includes(searchValue.trim().toLowerCase())
     );
   });
 
@@ -151,11 +151,21 @@ const init = () => {
 window.addEventListener('DOMContentLoaded', init);
 
 searchBar.addEventListener(
-  'input',
+  'keyup',
   debounce((e) => {
     handleSearch(e);
   }, 500)
 );
+
+searchBar.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    filterOnSearchAndPriceThenDisplay(
+      searchBar.value,
+      rangeInput.valueAsNumber
+    );
+  }
+});
 
 searchBar.addEventListener('click', () => {
   // setPriceValue(MAX_PRICE_VALUE);
