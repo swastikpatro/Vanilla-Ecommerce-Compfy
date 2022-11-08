@@ -1,7 +1,7 @@
 import { addToCart } from './cart/setupCart.js';
 import { createRange, formatPrice } from './utils.js';
 
-function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
+function displayProducts(dataArr = [], container, hasCalledOnInit = false) {
   container.innerHTML = dataArr
     .map((singleProduct) => {
       const { name, price, img: myImage, id } = singleProduct;
@@ -37,7 +37,7 @@ function displayProducts(dataArr = [], container, displayingNotOnInit = false) {
     })
     .join('');
 
-  if (displayingNotOnInit) return;
+  if (!hasCalledOnInit) return;
 
   container.addEventListener('click', (e) => {
     const clickedOnProductIcon = e.target.closest('.product-cart-btn');
@@ -79,7 +79,9 @@ async function fetchProducts(url = '', myContainer) {
 
     return data;
   } catch (err) {
-    myContainer.innerHTML = `<div class="filter-error">${err}</div>`;
+    myContainer.innerHTML = `<div class="filter-error">${
+      `${'' + err}`.split(':')[1]
+    }</div>`;
   }
 }
 

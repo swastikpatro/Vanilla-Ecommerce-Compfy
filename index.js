@@ -29,7 +29,7 @@ async function indexInit() {
     return featured;
   });
 
-  displayProducts(featuredProducts, featuredContainer);
+  displayProducts(featuredProducts, featuredContainer, true);
 }
 
 window.addEventListener('DOMContentLoaded', indexInit);
