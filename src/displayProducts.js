@@ -77,7 +77,7 @@ async function fetchProducts(url = '', myContainer) {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (err) {
     myContainer.innerHTML = `<div class="filter-error">${
