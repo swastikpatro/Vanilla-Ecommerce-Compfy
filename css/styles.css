@@ -1658,3 +1658,8 @@ Single Product Page
     opacity: 1;
   }
 }
+
+.text-slanted {
+  font-style: italic;
+  letter-spacing: var(--letterSpacing);
+}
