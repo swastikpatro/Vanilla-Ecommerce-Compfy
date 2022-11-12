@@ -9,7 +9,7 @@ const setupStore = (products) => {
         fields: { company, colors, featured, price, name, image },
       } = single;
 
-      const [{ url: img }] = image;
+      const { url: img } = image[0].thumbnails.full;
       return { id, company, colors, featured, price, name, img };
     })
     .sort(({ price: price1 }, { price: price2 }) => price1 - price2);

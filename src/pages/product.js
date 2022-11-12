@@ -47,7 +47,7 @@ function renderSkeletonData() {
 
 function renderData(data) {
   const {
-    fields: { colors, company, name, price, image, description },
+    fields: { colors, company, name, price, image },
     id,
   } = data;
   const [{ url: myImage }] = image;
@@ -72,7 +72,11 @@ function renderData(data) {
                 .join('')}
             </div>
             <p class="single-product-desc">
-              ${description}
+              Brought by ${company.toUpperCase()}, available in ${
+    colors.length > 1 ? colors.length + ' colors' : colors.length + ' color'
+  } with just in the price of ${formatPrice(
+    price
+  )}. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reiciendis quia obcaecati.  Optio officia voluptate natus qui est a at veritatis iure exercitationem sit quae, modi, voluptatem enim sed dolore. Hare Krishna Hare Krishna, Krishna Krishna Hare Hare, Hare Ram Hare Ram, Ram Ram Hare Hare.
             </p>
             <button class="addToCartBtn btn" data-id="${id}">
               add to cart
@@ -112,6 +116,7 @@ async function fetchSingleProduct(singleProductUrl) {
     }
 
     const singleData = await response.json();
+    // console.log(singleData);
     return singleData;
   } catch (err) {
     console.log(err);
